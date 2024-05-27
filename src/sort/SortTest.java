@@ -6,7 +6,9 @@ public class SortTest {
 	public static void main(String[] args) {
 		int[] arr = {5,3,2,7,4,8,1,10,9,6};
 //		bubbleSort(arr);
-		insertionSort(arr);
+//		optimizedBubbleSort(arr);
+//		insertionSort(arr);
+		selectionSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
@@ -88,6 +90,35 @@ public class SortTest {
 		// 단점
 		// 배열 크기가 역순에 가까울 수록 비효율적이다 최악의 경우 O(N^2)의 시간 복잡도를 가진다
 		// 데이터의 상태에 따라 편차가 매우 크다
+	}
+	
+	
+	public static int[] selectionSort(int[] arr) {
+		// 삽입정렬
+		// 주어진 리스트의 최소값을 찾는다
+		// 현재 라운드 i번째의 위치의 값과 최소값의 위치를 바꾼다
+		// i는 최소값을 놔둘 위치
+		for (int i = 0; i < arr.length; i++) {
+			// j는 최소값을 찾는 for문
+			int minIdx = i;
+			for (int j = i; j < arr.length; j++) {
+				if (arr[j] < arr[minIdx]) {
+					minIdx = j;
+				}
+			}
+			// swap하기
+			int temp = arr[minIdx];
+			arr[minIdx] = arr[i];
+			arr[i] = temp;
+		}
+		return arr;
+		// 장점
+		// 추가적인 메모리 소비가 작다
+		// 단점
+		// 시간복잡도가 O(N^2)
+		// 안정 정렬이 아니다
+		// [B2,B1,A,C] => A < B1 , B2 < C라고 할 때 정렬을 하면 A, B2, B1, C로 정렬이 된다 같은 값일 때 이름 순서로 정렬을 하지 못한다는 단점이 있다
+		// 이러한 상태를 불안정정렬이라고 한다
 	}
 
 }
