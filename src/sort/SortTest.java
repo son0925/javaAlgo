@@ -5,17 +5,21 @@ public class SortTest {
 
 	public static void main(String[] args) {
 		int[] arr = {5,3,2,7,4,8,1,10,9,6};
-		bubbleSort(arr);
+//		bubbleSort(arr);
+		insertionSort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
 
 	}
 	
-	
+	// 시간 복잡도
+	// worst: O(n^2)
+	// best : O(n^2)
+	// average: O(n^2)
 	public static int[] bubbleSort(int[] arr) {
 		// 정렬 과정이 거품이 수면으로 올라오는 모습과 흡사하여 지어진 이름
-		// 마지막에 있는 숫자가 제일 큰 숫자로 정렬되었으며 n-2,3,4,5만큼 돈다
+		// 라운드별 i 번째가 제일 큰 숫자 다음 라운드는 i--
 		for (int i = arr.length-1; i>=0; i--) {
 			for (int j = 0; j < i; j++) {
 				// j, j+1을 비교하여 더 큰 숫자를 뒤에 놔두며 한바퀴를 돈다
@@ -27,6 +31,12 @@ public class SortTest {
 			}
 		}
 		return arr;
+		// 장점
+		// 1. 추가적인 메모리 소비가 적다
+		// 2. 구현이 매우 쉽다.
+		// 3. 안정정렬이 가능하다
+		// 단점
+		// 교환 과정이 많아 많은 시간이 소비된다
 	}
 	
 	public static int[] optimizedBubbleSort(int[] arr) {
@@ -49,6 +59,35 @@ public class SortTest {
 		}
 		
 		return arr;
+	}
+	
+	// 시간 복잡도
+	// worst: O(N^2)
+	// best : O(N)
+	// average: O(N^2) <평균 시간복잡도가 O(N^2)중에서는 가장 빠르다
+	public static int[] insertionSort(int[] arr) {
+		// 현재 비교하는 타겟(i)와 비교(j,j-1...0)하는 원소들을 정렬하는 알고리즘이다
+		// 현재 i -1 부터 비교를 하기 때문에 1부터 시작
+		for (int i = 1; i < arr.length; i++) {
+			int target = arr[i];
+			int j = i - 1;
+			// j >= 0가 먼저 앞에 와야함 - j = -1 일 때 arr[j]를 확인했을 때 오류가 생김
+			while (j >= 0 && arr[j] > target) {
+				// j + 1은 현재 타겟이 있는 위치
+				arr[j+1] = arr[j];
+				j--;
+			}
+			// 반복문을 탈출 했을 때는 j번째 값보다 크기 때문에 j+1위치에 target값을 저장한다
+			arr[j+1] = target;
+		}
+		return arr;
+		// 장점
+		// 추가적인 메모리 소비가 작다
+		// 거의 정렬된 경우 매우 효율적이다 최선의 경우 O(N)의 시간복잡도
+		// 안정정렬이 가능하다
+		// 단점
+		// 배열 크기가 역순에 가까울 수록 비효율적이다 최악의 경우 O(N^2)의 시간 복잡도를 가진다
+		// 데이터의 상태에 따라 편차가 매우 크다
 	}
 
 }
