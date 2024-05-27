@@ -1,5 +1,6 @@
 package sort;
 
+import java.util.Arrays;
 
 public class SortTest {
 
@@ -8,10 +9,9 @@ public class SortTest {
 //		bubbleSort(arr);
 //		optimizedBubbleSort(arr);
 //		insertionSort(arr);
-		selectionSort(arr);
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + " ");
-		}
+//		selectionSort(arr);
+		shellSort(arr);
+		System.out.println("결과 : " + Arrays.toString(arr));
 
 	}
 	
@@ -92,7 +92,10 @@ public class SortTest {
 		// 데이터의 상태에 따라 편차가 매우 크다
 	}
 	
-	
+	// 시간 복잡도
+	// worst: O(n^2)
+	// best : O(n^2)
+	// average O(N^2)
 	public static int[] selectionSort(int[] arr) {
 		// 삽입정렬
 		// 주어진 리스트의 최소값을 찾는다
@@ -119,7 +122,28 @@ public class SortTest {
 		// 안정 정렬이 아니다
 		// [B2,B1,A,C] => A < B1 , B2 < C라고 할 때 정렬을 하면 A, B2, B1, C로 정렬이 된다 같은 값일 때 이름 순서로 정렬을 하지 못한다는 단점이 있다
 		// 이러한 상태를 불안정정렬이라고 한다
-		// 선택 정렬
+	}
+	
+	public static int[] shellSort(int[] arr) {
+		// 쉘 정렬이란 삽입 정렬의 장점을 극대화하고 단점을 최소화 하는 정렬이다
+		// 간격을 설정하고 간격별로 분류된 서브 리스트에 대해 삽입정렬을 한다
+		// 정렬이 끝나면 간격을 줄인다
+		// 간격이 1이 될 때까지 계속 반복한다
+		
+		// 간격 구하기
+		for (int gap = arr.length; gap > 0; gap/=2) {
+			for (int i = gap; i < arr.length; i++) {
+				int temp = arr[i];
+				int j = i - gap;
+				System.out.println("temp : " + temp + " arr[j] : " + arr[j] + " gap : " + gap);
+				while (j >= 0 && arr[j] > temp) {
+					arr[j+gap] = arr[j];
+					j-=gap;
+				}
+				arr[j+gap] = temp;
+			}
+		}
+		return arr;
 	}
 
 }
