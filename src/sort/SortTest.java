@@ -28,5 +28,27 @@ public class SortTest {
 		}
 		return arr;
 	}
+	
+	public static int[] optimizedBubbleSort(int[] arr) {
+		// 버블 정렬 최적화
+		boolean swapped;
+		for (int i = arr.length-1; i >= 0; i--) {
+			swapped = false;
+			for (int j = 0; j < i; j++) {
+				if (arr[j] > arr[j+1]) {
+					int temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+					swapped = true;
+				}
+			}
+			// 바뀌지 않았다면 종료하기
+			if (!swapped) {
+				break;
+			}
+		}
+		
+		return arr;
+	}
 
 }
