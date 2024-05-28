@@ -197,9 +197,11 @@ public class SortTest {
 		}
 		
 		// 다시 list 배열에 담기
+		// 처음 index를 left로 설정하는 이유는 해당 배열의 최대로 작을 때 위치이다
 		for (int idx = left; idx <= right; idx++) {
 			list[idx] = sortList[idx];
 		}
+		System.out.println(Arrays.toString(list));
 	}
 	
 	public static void mergeSort(int[] list, int left, int right) {
