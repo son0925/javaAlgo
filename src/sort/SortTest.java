@@ -10,7 +10,8 @@ public class SortTest {
 //		optimizedBubbleSort(arr);
 //		insertionSort(arr);
 //		selectionSort(arr);
-		shellSort(arr);
+//		shellSort(arr);
+		mergeSort(arr,0,arr.length-1);
 		System.out.println("결과 : " + Arrays.toString(arr));
 
 	}
@@ -145,5 +146,74 @@ public class SortTest {
 		}
 		return arr;
 	}
+	
+	// 합병 정렬
+	// 안정정렬의 하나이며 분할 정복 알고리즘의 하나이다
+	// 문제를 작은 2개로 분리하고 각각 해결한 다음 결과를 모아서 원래 문제를 해결하는 알고리즘이다
+	
+	// 풀이 과정
+	// 리스트 길이가 0 혹은 1이면 정렬된 것으로 본다
+	// 그렇지 않은 경우 리스트를 절반으로 잘라서 비슷한 길이의 두 부분의 리스토로 나눈다
+	// 각 부분 리스트를 제귀적으로 합병 정렬을 이용해 정렬한다
+	// 두 부분 리스트를 하나의 리스트로 합친다
+	
+	// 추가 지식
+	// 추가적인 리스트가 필요하다
+	// 각 부분 배열을 정렬할 때도 합병 정렬을 순환적으로 호출하여 적용해야 한다
+	// 실제로 정렬이 이루어지는 부분은 2개의 리스트를 합병하는 단계이다 -> 합병할 때 정렬이 이루어진다
+	
+	public static void merge(int[] list, int left, int mid, int right) {
+		// i,j List의 0번째, right = len
+		// k sortList의 담는 변수
+		int i,j,k;
+		i = left;
+		j = mid+1;
+		k = left;
+		int[] sortList = new int[list.length];
+		
+		// 리스트를 2분할해서 a리스트의 0번이 list의 mid까지 가고 b리스트의 j번이 length가 되기 전까지
+		while (i<=mid && j<=right) {
+			// 만약 a리스트 i번째가 b리스트 j번째보다 낮거나 같을 때 sortList에 넣어라
+			if(list[i] <= list[j]) {
+				sortList[k++] = list[i++];
+			}
+			else {
+				sortList[k++] = list[j++];
+			}
+		}
+		
+		
+		// 반복문 종료 후 남은 리스트 정렬 리스트에 넣기
+		if (i > mid) {
+			for(int idx = j; idx <= right; idx++) {
+				sortList[k++] = list[idx];
+			}
+		}
+		
+		else {
+			for (int idx = i; idx <= mid; idx++) {
+				sortList[k++] = list[idx];
+			}
+		}
+		
+		// 다시 list 배열에 담기
+		for (int idx = left; idx <= right; idx++) {
+			list[idx] = sortList[idx];
+		}
+	}
+	
+	public static void mergeSort(int[] list, int left, int right) {
+		int mid;
+		
+		// 리스트 크기가 1이 될때까지 재귀함수 호출
+		if (left < right) {
+			mid = (left + right) / 2;
+			mergeSort(list,left,mid);
+			mergeSort(list,mid+1,right);
+			merge(list,left,mid,right);
+		}
+	}
+	
+	
 
 }
