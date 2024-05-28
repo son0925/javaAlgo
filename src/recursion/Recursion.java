@@ -13,7 +13,9 @@ public class Recursion {
 //		System.out.println("재귀함수 팩토리얼 구하기 : " + factorial(5));
 //		System.out.println("자연수의 합 구하기 : " + sumNaturalNumber(5));
 //		System.out.println("거듭제곱 구하기 : " + power(2,7));
-		System.out.println(reverseString("abcde"));
+//		System.out.println("문자열 뒤집기 구하기 : "+reverseString("abcde"));
+//		System.out.println("피보나치 구하기 : "+pibonacci(8));
+		System.out.println("최대공약수 구하기 : " + gcd(10,7));
 	}
 	
 	public static int factorial(int n) {
@@ -48,6 +50,27 @@ public class Recursion {
 		else {
 			// reverseStrig(bcde) + a => reverseString(cde) + b + a => reverseString(de) + c + b + a... edcba로 된다
 			return reverseString(s.substring(1)) + s.charAt(0);
+		}
+	}
+	
+	public static long pibonacci(int n) {
+		if (n == 0) {
+			return 0;
+		}
+		else if (n == 1) {
+			return 1;
+		}
+		else {
+			return pibonacci(n-1) + pibonacci(n-2);
+		}
+	}
+	
+	public static int gcd(int m, int n) {
+		if (n == 0) {
+			return m;
+		}
+		else {
+			return gcd(n, m%n);
 		}
 	}
 
