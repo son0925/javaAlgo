@@ -15,7 +15,8 @@ public class Recursion {
 //		System.out.println("거듭제곱 구하기 : " + power(2,7));
 //		System.out.println("문자열 뒤집기 구하기 : "+reverseString("abcde"));
 //		System.out.println("피보나치 구하기 : "+pibonacci(8));
-		System.out.println("최대공약수 구하기 : " + gcd(10,7));
+//		System.out.println("최대공약수 구하기 : " + gcd(10,7));
+		System.out.println("이항계수 구하기 : " + binomialCoefficient(4, 2));
 	}
 	
 	public static int factorial(int n) {
@@ -71,6 +72,15 @@ public class Recursion {
 		}
 		else {
 			return gcd(n, m%n);
+		}
+	}
+	
+	public static int binomialCoefficient(int n, int k) {
+		if (k ==0 || k == n) {
+			return 1;
+		}
+		else {
+			return binomialCoefficient(n-1, k-1) + binomialCoefficient(n-1, k);
 		}
 	}
 
